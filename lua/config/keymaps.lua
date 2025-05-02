@@ -7,3 +7,4 @@ vim.keymap.set("n", "<leader>cf", function()
 		lsp_format = "fallback",
 	})
 end, { desc = "Code Formating" })
+vim.keymap.set("n", "|", "<cmd>vsp<CR>", { desc = "Split buffer" })
