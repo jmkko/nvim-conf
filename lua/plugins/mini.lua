@@ -48,4 +48,14 @@ return {
     version = false,
     opts={}
   },
+  {
+    'echasnovski/mini-git',
+    version = false,
+    main = 'mini.git',
+    config = function()
+      require('mini.git').setup({
+        signs = true, -- Active les signes Git dans la gutter
+      })
+    end
+  },
 }
