@@ -21,7 +21,6 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-require("config.options")
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -36,5 +35,3 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
-require("config.keymaps")
-require("module.togglelsp")

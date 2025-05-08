@@ -1,7 +1,7 @@
 #!/bin/bash
 #save nvim folder
 
-NAME="jm-"
+NAME="-jm-bug-"
 
 mv ~/.config/nvim ~/.config/nvim.bak$NAME$(date +%d-%m-%Y)
 mv ~/.local/share/nvim ~/.local/share/nvim.bak$NAME$(date +%d-%m-%Y)
