@@ -42,7 +42,8 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
+      { "MunifTanjim/nui.nvim", version = "*" }, -- pour prendre la dernière version stable
+      --"MunifTanjim/nui.nvim",
       -- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
       {
         "s1n7ax/nvim-window-picker", -- for open_with_window_picker keymaps
@@ -92,7 +93,7 @@ return {
 
       require("neo-tree").setup({
         close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
-        popup_border_style = "NC", -- or "" to use 'winborder' on Neovim v0.11+
+        popup_border_style = "rounded", -- or "" to use 'winborder' on Neovim v0.11+
         enable_git_status = true,
         enable_diagnostics = true,
         open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes

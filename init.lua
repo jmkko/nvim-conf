@@ -12,4 +12,16 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.expandtab = true
   end,
 })
+-- Monkey patch pour corriger l'accès à winborder dans certaines versions de nui
+local success, utils = pcall(require, "nui.utils")
+if success and utils and utils.get_default_winborder then
+  local orig = utils.get_default_winborder
+  utils.get_default_winborder = function()
+    local ok, result = pcall(orig)
+    if not ok then
+      return "single" -- fallback safe border
+    end
+    return result
+  end
+end
 
