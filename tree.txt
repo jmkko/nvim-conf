@@ -1,0 +1,35 @@
+.
+├── init.lua
+├── jmdoc
+│   └── save_nvim.sh
+├── lazy-lock.json
+├── lua
+│   ├── config
+│   │   ├── keymaps.lua
+│   │   ├── lazy.lua
+│   │   └── options.lua
+│   ├── module
+│   │   └── togglelsp.lua
+│   └── plugins
+│       ├── 42header.lua
+│       ├── blink-cmp.lua
+│       ├── conform.lua
+│       ├── dressing.lua
+│       ├── fterm.lua
+│       ├── fzf-lua.lua
+│       ├── gitsings.lua
+│       ├── kanagawa.lua
+│       ├── lsp.lua
+│       ├── mini.lua
+│       ├── neo-tree.lua
+│       ├── norminette.lua
+│       ├── nvim-treesitter.lua
+│       ├── nvim-treesitter-textobjects.lua
+│       ├── oil.lua
+│       ├── project.lua
+│       ├── sleuth-vim.lua
+│       └── which-key.lua
+├── README.md
+└── tree.txt
+
+6 directories, 27 files

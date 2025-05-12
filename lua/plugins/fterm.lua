@@ -1,19 +1,20 @@
 return {
   "numToStr/FTerm.nvim",
-  opts = {
-	keys ={
-		  "<leader>s",
-		  function() require('Fterm').toggle() end,
-		  desc = "Toggle Terminal"
-	},
+  keys = {
+    {
+      "<leader>ft",
+      "<cmd>lua require('FTerm').toggle()<CR>",
+      desc = "Toggle Terminal"
+    }
   },
   config = function()
-	require'FTerm'.setup({
-    border = 'double',
-    dimensions  = {
+    require("FTerm").setup({
+      border = "double",
+      dimensions = {
         height = 0.9,
         width = 0.9,
-    },
-	})
+      },
+    })
   end,
 }
+
