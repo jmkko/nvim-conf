@@ -296,5 +296,32 @@ return {
 				end,
 			},
 		})
+		require('lspconfig').clangd.setup({
+			cmd = {
+				"clangd",
+				"--header-insertion=never",
+				"--query-driver=/usr/bin/clang++",
+				"--compile-commands-dir=build", -- si tu utilises cmake
+				"--background-index",
+				"--pch-storage=memory",
+				"--log=error",
+				"--all-scopes-completion",
+				"--suggest-missing-includes",
+				"--clang-tidy",
+				"--fallback-style=none",
+				"--header-insertion-decorators=false",
+				-- Ajout des flags ici :
+				"--extra-arg=-I./",
+				"--extra-arg=-I../libft/include",
+				"--extra-arg=-I../include",
+				"--extra-arg=-I/usr/include",
+				"--extra-arg=-I../mlx",
+				"--extra-arg=-I../../",
+				"--extra-arg=-I../../include",
+				"--extra-arg=-I../../mlx",
+				"--extra-arg=-I../../libft/include",
+			},
+		})
+
 	end,
 }
