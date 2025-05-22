@@ -286,7 +286,7 @@ return {
               --"*/src/*/tsconfig.json",
             },
             always_show = { -- remains visible even if other settings would normally hide it
-              --".gitignored",
+              --".gitignore",
             },
             always_show_by_pattern = { -- uses glob style patterns
               --".env*",
@@ -299,10 +299,12 @@ return {
               --".null-ls_*",
             },
           },
+          bind_to_cwd = false,        -- Ne suit pas les changements de répertoire global
+          cwd_target = "none",        -- Important pour empêcher la redétection
           follow_current_file = {
             enabled = false, -- This will find and focus the file in the active buffer every time
             --               -- the current file is changed while the tree is open.
-            leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+            leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
           group_empty_dirs = false, -- when true, empty folders will be grouped together
           hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
@@ -353,9 +355,9 @@ return {
         },
         buffers = {
           follow_current_file = {
-            enabled = true, -- This will find and focus the file in the active buffer every time
+            enabled = false, -- This will find and focus the file in the active buffer every time
             --              -- the current file is changed while the tree is open.
-            leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+            leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
           group_empty_dirs = true, -- when true, empty folders will be grouped together
           show_unloaded = true,

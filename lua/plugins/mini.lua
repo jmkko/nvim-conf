@@ -49,6 +49,12 @@ return {
     opts={}
   },
   {
+    'echasnovski/mini.diff',
+    version = false,
+    opts={}
+  },
+
+  {
     'echasnovski/mini-git',
     version = false,
     main = 'mini.git',
