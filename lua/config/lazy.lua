@@ -34,4 +34,14 @@ require("lazy").setup({
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
-
+pcall(function()
+  local utils = require("nui.utils")
+  local orig = utils.get_default_winborder
+  utils.get_default_winborder = function()
+    local ok, result = pcall(orig)
+    if not ok then
+      return "single"
+    end
+    return result
+  end
+end)
