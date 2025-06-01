@@ -53,6 +53,11 @@ return {
     version = false,
     opts={}
   },
+  {
+    'echasnovski/mini.tabline',
+    version = false,
+    opts={}
+  },
 
   {
     'echasnovski/mini-git',
