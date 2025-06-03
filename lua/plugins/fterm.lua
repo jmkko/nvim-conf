@@ -9,6 +9,7 @@ return {
   },
   config = function()
     require("FTerm").setup({
+      cmd = os.getenv("zsh"),
       border = "double",
       dimensions = {
         height = 0.9,
