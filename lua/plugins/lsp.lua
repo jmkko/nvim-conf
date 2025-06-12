@@ -213,6 +213,7 @@ return {
 					"mm",
 					"cc",
 					"cpp",
+					"tpp",
 					"cxx",
 					"c++",
 					"hpp",
