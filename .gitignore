@@ -1,0 +1,10 @@
+# Lazy.nvim lockfile - ignore pour éviter les conflits entre machines
+lazy-lock.json
+
+# Fichiers de test temporaires
+test*.cpp
+test*.lua
+
+# Logs et caches
+*.log
+.DS_Store

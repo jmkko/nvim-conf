@@ -23,18 +23,6 @@
 --
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    opts = {
-      ensure_installed = { "cpp", "c", "lua" },
-      highlight = { enable = true },
-    },
-  },
-  {
-    "L3MON4D3/LuaSnip",
-    build = "make install_jsregexp"
-  },
-  {
     "danymat/neogen",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
@@ -47,21 +35,29 @@ return {
         languages = {
           cpp = {
             template = {
-              annotation_convention = "doxygen", -- ⚡️ clé essentielle
+              annotation_convention = "doxygen",
             },
           },
           c = {
             template = {
-              annotation_convention = "doxygen",
+              annotation_convention = "doxygen", 
             },
           },
         },
       })
-
-      -- Raccourci pratique pour générer la doc
-      vim.keymap.set("n", "<leader>d", function()
+      
+      -- Keymaps pour Neogen
+      vim.keymap.set("n", "<leader>ng", function()
         require("neogen").generate()
-      end, { desc = "Générer un commentaire de fonction" })
+      end, { desc = "Generate documentation comment" })
+      
+      vim.keymap.set("n", "<leader>nf", function()
+        require("neogen").generate({ type = "func" })
+      end, { desc = "Generate function documentation" })
+      
+      vim.keymap.set("n", "<leader>nc", function()
+        require("neogen").generate({ type = "class" })
+      end, { desc = "Generate class documentation" })
     end,
   }
 }
