@@ -58,6 +58,25 @@ return {
       vim.keymap.set("n", "<leader>nc", function()
         require("neogen").generate({ type = "class" })
       end, { desc = "Generate class documentation" })
+      
+      -- Keymap spécial pour constructeurs (fallback manuel)
+      vim.keymap.set("n", "<leader>nC", function()
+        local line = vim.api.nvim_get_current_line()
+        if line:match("^[%s]*[%w_:]+::[%w_:]+%(.*%).*[:{].*$") then
+          -- Détecte un pattern de constructeur
+          vim.api.nvim_put({
+            "/**",
+            " * @brief Construct a new object",
+            " * ",
+            " * @param port ",
+            " * @param psswd ",
+            " */"
+          }, "l", true, true)
+          vim.cmd("normal! 6k2w")
+        else
+          require("neogen").generate({ type = "func" })
+        end
+      end, { desc = "Generate constructor documentation" })
     end,
   }
 }
