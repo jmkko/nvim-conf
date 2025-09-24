@@ -2,6 +2,7 @@ require("config.lazy")
 require("config.keymaps")
 require("config.options")
 require("module.togglelsp")
+require("module.toggle-clangtidy")
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "c",
   callback = function()
