@@ -66,9 +66,9 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = {"*.cpp", "*.hpp", "*.cc", "*.c", "*.h", "*.tpp"},
-    callback = function()
-        vim.cmd("silent! !clang-format -style=file -i " .. vim.fn.expand("%"))
-    end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     pattern = {"*.cpp", "*.hpp", "*.cc", "*.c", "*.h", "*.tpp"},
+--     callback = function()
+--         vim.cmd("silent! !clang-format -style=file -i " .. vim.fn.expand("%"))
+--     end,
+-- })

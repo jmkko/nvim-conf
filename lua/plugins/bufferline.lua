@@ -24,7 +24,13 @@ return {
   version = "*",
   opts = {
         options = {
-            mode = "tabs", -- "buffers" or set to "tabs" to only show tabpages instead
+            mode = "buffers", -- "buffers" or set to "tabs" to only show tabpages instead
+            max_name_length = 18,
+            max_prefix_length = 15,
+            tab_size = 20,
+            show_buffer_close_icons = true,
+            show_close_icon = true,
+            always_show_bufferline = false,
             themable = true, -- allows highlight groups to be overriden i.e. sets highlights as default
             hover = {
                 enabled = true,

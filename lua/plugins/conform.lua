@@ -1,27 +1,38 @@
+
 return {
 	"stevearc/conform.nvim",
 	opts = {
 		formatters_by_ft = {
 			lua = { "stylua" },
-			-- c = { "clang-format" },
-			-- Conform will run multiple formatters sequentially
 			python = { "isort", "black" },
-			-- You can customize some of the format options for the filetype (:help conform.format)
 			rust = { "rustfmt", lsp_format = "fallback" },
-			-- Conform will run the first available formatter
 			javascript = { "prettierd", "prettier", stop_after_first = true },
-			cpp = { "clang_format" },
-			c = { "clang_format" },
-			h = { "clang_format" },
-			["c++"] = { "clang_format" },
+			-- Tous les filetypes C/C++
+			c = { "clang-format" },
+			cpp = { "clang-format" },
+			h = { "clang-format" },
+			hpp = { "clang-format" },
+			cc = { "clang-format" },
+			cxx = { "clang-format" },
+			tpp = { "clang-format" },
+		},
+		formatters = {
+			["clang-format"] = {
+			command = "/opt/homebrew/opt/llvm/bin/clang-format",
+				args = {
+					"--style=file", -- Utilise le .clang-format du projet
+					"--assume-filename=$FILENAME", -- Important pour la détection du langage
+				},
+				stdin = true,
+			},
 		},
 		default_format_opts = {
 			lsp_format = "fallback",
 		},
-		-- format_on_save = {
-		-- 	-- These options will be passed to conform.format()
-		-- 	timeout_ms = 500,
-		-- 	lsp_format = "fallback",
-		-- },
+		format_on_save = {
+			-- These options will be passed to conform.format()
+			timeout_ms = 500,
+			lsp_format = "fallback",
+		},
 	},
 }

@@ -294,39 +294,13 @@ return {
 					-- certain features of an LSP (for example, turning off formatting for ts_ls)
 					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 					
-					-- Use the new vim.lsp.config API for Neovim 0.11+
-					vim.lsp.config[server_name] = server
+					-- Use the standard lspconfig setup instead of new API (causes blocking)
+					require('lspconfig')[server_name].setup(server)
 				end,
 			},
 		})
-		-- Configuration spéciale pour clangd avec la nouvelle API vim.lsp.config
-		vim.lsp.config.clangd = vim.tbl_deep_extend("force", servers.clangd or {}, {
-			capabilities = capabilities,
-			cmd = {
-				"clangd",
-				"--header-insertion=never",
-				"--query-driver=/usr/bin/clang++",
-				"--compile-commands-dir=build", -- si tu utilises cmake
-				"--background-index",
-				"--pch-storage=memory",
-				"--log=error",
-				"--all-scopes-completion",
-				"--suggest-missing-includes",
-				"--clang-tidy",
-				"--fallback-style=none",
-				"--header-insertion-decorators=false",
-				-- Ajout des flags ici :
-				-- "--extra-arg=-I./",
-				-- "--extra-arg=-I../libft/include",
-				-- "--extra-arg=-I../include",
-				-- "--extra-arg=-I/usr/include",
-				-- "--extra-arg=-I../mlx",
-				-- "--extra-arg=-I../../",
-				-- "--extra-arg=-I../../include",
-				-- "--extra-arg=-I../../mlx",
-				-- "--extra-arg=-I../../libft/include",
-			},
-		})
+		-- Configuration pour clangd déjà gérée dans servers.clangd ci-dessus
+		-- (la config vim.lsp.config causait des blocages)
 
 	end,
 }
