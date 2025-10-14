@@ -1,4 +1,3 @@
-
 return {
 	"stevearc/conform.nvim",
 	opts = {
@@ -18,7 +17,7 @@ return {
 		},
 		formatters = {
 			["clang-format"] = {
-			command = "/opt/homebrew/opt/llvm/bin/clang-format",
+				command = "/opt/homebrew/opt/llvm/bin/clang-format",
 				args = {
 					"--style=file", -- Utilise le .clang-format du projet
 					"--assume-filename=$FILENAME", -- Important pour la détection du langage

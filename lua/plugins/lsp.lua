@@ -228,7 +228,14 @@ return {
 					"-j=4",
 					"--background-index",
 					"--background-index-priority=low",
+					"--log=verbose",
 				},
+				-- Permettre à clangd de chercher automatiquement les fichiers .clangd
+				root_dir = function(fname)
+					return require('lspconfig.util').root_pattern('.clangd', '.clang-tidy', 'compile_commands.json', 'CMakeLists.txt', 'Makefile')(fname)
+						or require('lspconfig.util').find_git_ancestor(fname)
+						or vim.fn.getcwd()
+				end,
 			},
 			--clangd = {},
 			--harper_ls = {},

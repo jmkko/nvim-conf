@@ -10,16 +10,11 @@ local function get_clangd_config_with_tidy()
   return {
     "clangd",
     "--header-insertion=never",
-    "--query-driver=/usr/bin/clang++",
-    "--compile-commands-dir=build",
+    "-j=4",
     "--background-index",
-    "--pch-storage=memory",
-    "--log=error",
-    "--all-scopes-completion",
-    "--suggest-missing-includes",
+    "--background-index-priority=low",
     "--clang-tidy",
-    "--fallback-style=none",
-    "--header-insertion-decorators=false",
+    "--log=verbose",
   }
 end
 
@@ -28,15 +23,10 @@ local function get_clangd_config_without_tidy()
   return {
     "clangd",
     "--header-insertion=never",
-    "--query-driver=/usr/bin/clang++",
-    "--compile-commands-dir=build",
+    "-j=4",
     "--background-index",
-    "--pch-storage=memory",
-    "--log=error",
-    "--all-scopes-completion",
-    "--suggest-missing-includes",
-    "--fallback-style=none",
-    "--header-insertion-decorators=false",
+    "--background-index-priority=low",
+    "--log=verbose",
   }
 end
 
@@ -53,18 +43,29 @@ local function restart_clangd()
     -- Mettre à jour la configuration
     local cmd = clang_tidy_enabled and get_clangd_config_with_tidy() or get_clangd_config_without_tidy()
     
-    -- Reconfigurer clangd avec la nouvelle commande
-    vim.lsp.config.clangd = vim.tbl_deep_extend("force", vim.lsp.config.clangd or {}, {
-      cmd = cmd,
-    })
+    -- Mettre à jour la configuration globale de clangd
+    local config = require('lspconfig').clangd
+    if config then
+      config.cmd = cmd
+    end
     
     -- Redémarrer pour les buffers C/C++ ouverts
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
       if vim.api.nvim_buf_is_loaded(buf) then
         local ft = vim.api.nvim_get_option_value("filetype", { buf = buf })
         if ft == "c" or ft == "cpp" or ft == "h" or ft == "hpp" then
-          -- Attacher le LSP au buffer
-          vim.api.nvim_exec_autocmds("FileType", { buffer = buf })
+          -- Redémarrer le LSP pour ce buffer
+          vim.lsp.start_client({
+            name = "clangd",
+            cmd = cmd,
+            root_dir = function(fname)
+              return require('lspconfig.util').root_pattern('.clangd', '.clang-tidy', 'compile_commands.json', 'CMakeLists.txt', 'Makefile')(fname)
+                or require('lspconfig.util').find_git_ancestor(fname)
+                or vim.fn.getcwd()
+            end,
+            filetypes = {"c", "cpp", "h", "hpp", "cc", "cxx", "c++"},
+            capabilities = require('cmp_nvim_lsp').default_capabilities(),
+          })
         end
       end
     end

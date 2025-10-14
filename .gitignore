@@ -1,5 +1,6 @@
 # Lazy.nvim lockfile - ignore pour éviter les conflits entre machines
 lazy-lock.json
+lazy-lock.json.bak
 
 # Fichiers de test temporaires
 test*.cpp
